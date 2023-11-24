@@ -9,7 +9,7 @@ class RankController extends Controller
 {
     public function getRanksArrage()
     {
-        $rank = Rank::with('user:id,name,image')->orderBy("point", "desc")->get();
+        $rank = Rank::with('user:id,name,image')->orderBy("point", "desc")->get()->toArray();
         return view("index")->with("ranks", $rank);
     }
     public function getUser(Request $request)

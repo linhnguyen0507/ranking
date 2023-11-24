@@ -1,3 +1,17 @@
+<?php
+    function getPositionUser($arr, $point) {
+        // var_dump($arr);
+        for ($i=0; $i < count($arr); $i++) { 
+        
+            if ($arr[$i]['point'] == $point) {
+               return $i ;
+               
+            }
+        }
+       return -1;
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,13 +70,13 @@
                                 <div class="col-4  text-center">
                                     <div class="rank">
                                         <i class="fa-solid fa-crown "></i>
-                                        <h3>No.2</h3>
+                                        <h3>No.{{($ranks[$i + 1]['point'] ==$ranks[$i]['point'] )? 1: 2     }} </h3>
                                     </div>
-                                    <img src="<?php echo $ranks[$i + 1]->user->image; ?>" alt="">
+                                    <img src="<?php echo $ranks[$i + 1]['user']['image']; ?>" alt="">
                                     <div class="top-rank_user">
-                                        <h3 class="user_i" data-user='{{ $ranks[$i + 2]->user->id }}'>
-                                            {{ $ranks[$i + 1]->user->name }}</h3>
-                                        <span class="point"><span class="color-text">{{ $ranks[$i + 1]->point }}</span>
+                                        <h3 class="user_i" data-user='{{ $ranks[$i+1]['user']['id'] }}.{{($ranks[$i + 1]['point'] ==$ranks[$i]['point'] )? 1: 2     }}'>
+                                            {{ $ranks[$i + 1]['user']['name'] }}</h3>
+                                        <span class="point"><span class="color-text">{{ $ranks[$i + 1]['point'] }}</span>
                                             points</span>
 
                                     </div>
@@ -73,11 +87,11 @@
                                     <i class="fa-solid fa-crown bg-crown-top1"></i>
                                     <h3>No.1</h3>
                                 </div>
-                                <img class="avt-top1" src="<?php echo $ranks[$i]->user->image; ?>" alt="">
+                                <img class="avt-top1" src="<?php echo $ranks[$i]['user']['image']; ?>" alt="">
                                 <div class="top-rank_user">
-                                    <h3 class="user_i" data-user='{{ $ranks[$i + 2]->user->id }}'>
-                                        {{ $ranks[$i]->user->name }}</h3>
-                                    <span class="point"><span class="color-text">{{ $ranks[$i]->point }}</span>
+                                    <h3 class="user_i" data-user='{{ $ranks[$i]['user']['id'] }}.1'>
+                                        {{ $ranks[$i]['user']['name']}}</h3>
+                                    <span class="point"><span class="color-text">{{ $ranks[$i]['point'] }}</span>
                                         points</span>
 
                                 </div>
@@ -86,13 +100,17 @@
                                 <div class="col-4 text-center">
                                     <div class="rank">
                                         <i class="fa-solid fa-crown bg-crown-top3"></i>
-                                        <h3>No.3</h3>
+                                        <h3>No.<?php 
+                                        $position=  getPositionUser($ranks, $ranks[$i+2]['point']);
+                                     
+                                       echo ( $position != -1) ?  $position+1 : '3'
+                                        ?></h3>
                                     </div>
-                                    <img src="<?php echo $ranks[$i + 2]->user->image; ?>" alt="">
+                                    <img src="<?php echo $ranks[$i + 2]['user']['image']; ?>" alt="">
                                     <div class="top-rank_user">
-                                        <h3 class="user_i" data-user='{{ $ranks[$i + 2]->user->id }}'>
-                                            {{ $ranks[$i + 2]->user->name }}</h3>
-                                        <span class="point"><span class="color-text">{{ $ranks[$i + 2]->point }}</span>
+                                        <h3 class="user_i" data-user='{{ $ranks[$i+2]['user']['id'] }}.{{( $position != -1) ?  $position+1 : $i}}'>
+                                            {{ $ranks[$i + 2]['user']['name'] }}</h3>
+                                        <span class="point"><span class="color-text">{{ $ranks[$i + 2]['point'] }}</span>
                                             points</span>
 
 
@@ -116,20 +134,24 @@
             <div class="container">
                 <ul>
                     <?php 
-                    for ($i=4; $i < count($ranks); $i++) { 
+                    for ($i=3; $i < count($ranks); $i++) { 
                         # code...
                         ?>
 
                     <li class="mt-3 py-2"><a href="">
                             <div class="numerical px-3">
-                                {{ $i }}
+                                <?php 
+                                        $position=  getPositionUser($ranks, $ranks[$i]['point']);
+                                     
+                                       echo ( $position != -1) ?  $position+1 : $i
+                                        ?>
                             </div>
-                            <img src="<?php echo $ranks[$i]->user->image; ?>" alt="">
+                            <img src="<?php echo $ranks[$i]['user']['image']; ?>" alt="">
                             <div class="card-body">
-                                <h4 data-user='{{ $ranks[$i]->user->id }}' class="card-title user_i">
-                                    {{ $ranks[$i]->user->name }}
+                                <h4 data-user='{{ $ranks[$i]['user']['id'] }}.{{( $position != -1) ?  $position+1 : $i}}' class="card-title user_i">
+                                    {{ $ranks[$i]['user']['name'] }}
                                 </h4>
-                                <div class="point"><span class="color-text">{{ $ranks[$i]->point }}</span> points
+                                <div class="point"><span class="color-text">{{ $ranks[$i]['point'] }}</span> points
                                 </div>
                             </div>
                             <div class="card-icon px-3">
@@ -180,16 +202,23 @@
         },
         url: "http://127.0.0.1:8000/api/get-user",
         data: {
-            id: 8
+            id: 38
         },
         dataType: "json",
         success: function(response) {
             $('#your_img').attr('src', response.user_info.user.image)
             $('#your_name').text(response.user_info.user.name)
             $('#your_point').text(response.user_info.point)
-            $('#your_top').text(response.rank);
-            $('#top').text(response.rank);
-
+            $.each($('.user_i'), function (indexInArray, valueOfElement) { 
+                if ($(valueOfElement).attr('data-user').split('.')[0] == response.user_info.user.id) {
+                    let top = $(valueOfElement).attr('data-user').split('.')[1]
+                    console.log($(valueOfElement).attr('data-user').split('.'));
+                    $('#top').text(top);
+                    $('#your_top').text(top);
+                    
+                    
+                }
+            });
         }
     })
     console.log(top);
