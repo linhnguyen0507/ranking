@@ -23,6 +23,7 @@ class RankFactory extends Factory
         return [
             'user_id' => fake()->unique()->numberBetween(1, 100),
             'point' => fake()->numberBetween(1, 1000),
+            
         ];
     }
 
