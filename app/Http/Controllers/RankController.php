@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Rank;
 use Illuminate\Http\Request;
 
@@ -22,10 +23,7 @@ class RankController extends Controller
             ->first();
         
         if ($rank) {
-            $userRank = Rank::where('point', '>', $rank->point)->count();
-        
             return response()->json([
-                'rank' => $userRank,
                 'user_info' => $rank,
             ]);
         } else {

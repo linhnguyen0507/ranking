@@ -1,0 +1,33 @@
+form{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    justify-content: center;
+    margin: 0 auto;
+}
+form> h2{
+    text-align: center;
+    color: #fff;
+}
+form > label{
+    display: flex;
+    flex-direction: column;
+}
+form > label > span{
+    color: #fff;
+}
+form > label > input{
+    padding: 4px 8px;
+}
+.main{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image: url('https://as2.ftcdn.net/v2/jpg/05/21/18/03/1000_F_521180377_2iAVJqBQSo3cgKaVp8vMBR8asrC61DoU.jpg');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+form > label > div{
+    color: red;
+}

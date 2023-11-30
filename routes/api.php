@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RankController;
 use App\Models\Rank;
 use App\Models\User;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post("/get-user", [RankController::class,"getUser"]);
 Route::get("/get-ranks", [RankController::class,"getRanksArrage"]);
+Route::post("/register", [AuthController::class,"register"]);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
