@@ -182,7 +182,7 @@ function getPositionUser($arr, $point)
                     </div>
                     <div class="card-img-user">
                         <img id="your_img"
-                            src="https://www.kolabtree.com/blog/wp-content/uploads/2019/12/freelance-technical-writer.jpg"
+                            src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=1335"
                             alt="">
                     </div>
                     <div class="card-body px-3">

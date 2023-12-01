@@ -65,15 +65,14 @@
         },
         dataType: "json",
         success: function(response) {
-            console.log(response.error);
-            $('.errEmail').text(response.error.email[0])
-            $('.errName').text(response.error.name[0])
-            $('.errpsw').text(response.error.password[0])
+            window.location.href = '/'
         },
         error: function(response){
-            $('.errEmail').text(response.responseJSON.errors.email[0]|| '')
-            $('.errName').text(''||response.responseJSON.errors.name[0])
-            $('.errpsw').text(response.responseJSON.errors.password[0]||'')
+            console.log(response);
+$('.errEmail').text(response.responseJSON.errors.email ? response.responseJSON.errors.email[0] : "");
+$('.errName').text(response.responseJSON.errors.name ? response.responseJSON.errors.name[0] : "");
+$('.errpsw').text(response.responseJSON.errors.password ? response.responseJSON.errors.password[0] : "");
+
         }
     })
     })

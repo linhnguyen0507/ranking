@@ -41,7 +41,7 @@ class AuthController extends Controller
             ]);
             Auth::login($user);
              $user->createToken('myapptoken')->plainTextToken;
-    return redirect()->route('index')->with('success','Register Success!');
+    return  response()->json('success',200);
         
     }
 

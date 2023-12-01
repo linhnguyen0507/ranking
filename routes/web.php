@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/login', [AuthController::class,"showLogin"]);
-Route::post('/auth/login', [AuthController::class,"login"])->name("login");
+Route::post('/login', [AuthController::class,"login"])->name("login");
 Route::get('/register', [AuthController::class,"showRegister"]);
 Route::middleware(["auth"])->group(function () {
     Route::get('/', [RankController::class,"getRanksArrage"])->name("index");
