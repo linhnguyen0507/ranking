@@ -227,6 +227,47 @@ header {
 .content{
     width: 100%;
 }
+.posts{
+    background-color: white;
+}
+.post-icon{
+    display: flex;
+    
+}
+.like-post,
+.fv-post{
+    margin-left: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    justify-content: center;
+    border-radius: 100%;
+}
+.post-item{
+    padding: 4px 20px;
+}
+.like-post:hover,
+.fv-post:hover{
+    background-color: aliceblue;
+}
+.like-post,
+.fv-post{
+    color: #ccc;
+    border: none;
+}
+.like-post.active{
+    color: aqua;
+}
+.fv-post.active{
+    color: red;
+}
+footer{
+    height: 65px;
+}
 @media only screen and (min-width: 480px) {
     .top-rank {
         width: 100%;

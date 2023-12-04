@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NotifyController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RankController;
 use Illuminate\Support\Facades\Route;
@@ -22,5 +23,7 @@ Route::get('/register', [AuthController::class,"showRegister"]);
 Route::middleware(["auth"])->group(function () {
     Route::get('/', [RankController::class,"getRanksArrage"])->name("index");
     Route::post('/', [RankController::class,"gestUser"]);
+    Route::post('/like', [NotifyController::class,"like"])->name("like");
+    Route::post('/favorite', [NotifyController::class,"favorite"])->name('favorite');
     Route::post('/create', [PostController::class,"store"])->name("create.post");
 });

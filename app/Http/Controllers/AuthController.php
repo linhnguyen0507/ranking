@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rank;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,8 @@ class AuthController extends Controller
                 'email' => $fields['email'],
                 'password' => bcrypt($fields['password'])
             ]);
+            $rank = new Rank();
+            $rank->save();
             Auth::login($user);
              $user->createToken('myapptoken')->plainTextToken;
     return  response()->json('success',200);

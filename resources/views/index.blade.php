@@ -42,7 +42,7 @@ function getPositionUser($arr, $point)
                 <div class="rank-time my-3 text-center">
                     <a class="" href="">MONTHLY</a>
                     <a class="active" href="">YEARLY</a>
-                   
+
                 </div>
                 <div class="user-rank text-center positon-relative">
                     <div class="rank">
@@ -71,7 +71,9 @@ function getPositionUser($arr, $point)
                                         <i class="fa-solid fa-crown "></i>
                                         <h3>No.{{ $ranks[$i + 1]['point'] == $ranks[$i]['point'] ? 1 : 2 }} </h3>
                                     </div>
-                                    <img class="img_cover" src="https://images.ctfassets.net/lh3zuq09vnm2/yBDals8aU8RWtb0xLnPkI/19b391bda8f43e16e64d40b55561e5cd/How_tracking_user_behavior_on_your_website_can_improve_customer_experience.png" alt="">
+                                    <img class="img_cover"
+                                        src="https://images.ctfassets.net/lh3zuq09vnm2/yBDals8aU8RWtb0xLnPkI/19b391bda8f43e16e64d40b55561e5cd/How_tracking_user_behavior_on_your_website_can_improve_customer_experience.png"
+                                        alt="">
                                     <div class="top-rank_user">
                                         <h3 class="user_i"
                                             data-user='{{ $ranks[$i + 1]['user']['id'] }}.{{ $ranks[$i + 1]['point'] == $ranks[$i]['point'] ? 1 : 2 }}'>
@@ -88,7 +90,9 @@ function getPositionUser($arr, $point)
                                     <i class="fa-solid fa-crown bg-crown-top1"></i>
                                     <h3>No.1</h3>
                                 </div>
-                                <img class="avt-top1" class="img_cover" src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=1335" alt="">
+                                <img class="avt-top1" class="img_cover"
+                                    src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=1335"
+                                    alt="">
                                 <div class="top-rank_user">
                                     <h3 class="user_i" data-user='{{ $ranks[$i]['user']['id'] }}.1'>
                                         {{ $ranks[$i]['user']['name'] }}</h3>
@@ -107,7 +111,9 @@ function getPositionUser($arr, $point)
                                         echo $position != -1 ? $position + 1 : '3';
                                         ?></h3>
                                     </div>
-                                    <img class="img_cover" src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://images.ctfassets.net/wp1lcwdav1p1/HNuAe2M59cQATyNkXb4mR/f3503ac70f716f3bb3e7b0161b4e53bd/edited_iStock-693553358__1_.png?w=1500&h=680&q=60&fit=fill&f=faces&fm=jpg&fl=progressive&auto=format%2Ccompress&dpr=1&w=1000&h=" alt="">
+                                    <img class="img_cover"
+                                        src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://images.ctfassets.net/wp1lcwdav1p1/HNuAe2M59cQATyNkXb4mR/f3503ac70f716f3bb3e7b0161b4e53bd/edited_iStock-693553358__1_.png?w=1500&h=680&q=60&fit=fill&f=faces&fm=jpg&fl=progressive&auto=format%2Ccompress&dpr=1&w=1000&h="
+                                        alt="">
                                     <div class="top-rank_user">
                                         <h3 class="user_i"
                                             data-user='{{ $ranks[$i + 2]['user']['id'] }}.{{ $position != -1 ? $position + 1 : $i }}'>
@@ -132,9 +138,9 @@ function getPositionUser($arr, $point)
             </div>
         </div>
     </section>
-    <section class="main2 pt-4 mb-5" style="margin-bottom: 90px !important">
-        <div class="container bg-main2">
-            <div class="container">
+    <section class="main2 pt-4 ">
+        <div class=" bg-main2 pb-1">
+            <div class="container mb-2">
                 <ul>
                     <?php 
                     for ($i=3; $i < count($ranks); $i++) { 
@@ -149,7 +155,9 @@ function getPositionUser($arr, $point)
                                 echo $position != -1 ? $position + 1 : $i;
                                 ?>
                             </div>
-                            <img class="img_cover" src="https://res.cloudinary.com/grand-canyon-university/image/fetch/w_750,h_564,c_fill,g_faces,q_auto/https://www.gcu.edu/sites/default/files/media/GettyImages-485337116.jpg" alt="">
+                            <img class="img_cover"
+                                src="https://res.cloudinary.com/grand-canyon-university/image/fetch/w_750,h_564,c_fill,g_faces,q_auto/https://www.gcu.edu/sites/default/files/media/GettyImages-485337116.jpg"
+                                alt="">
                             <div class="card-body">
                                 <h4 data-user='{{ $ranks[$i]['user']['id'] }}.{{ $position != -1 ? $position + 1 : $i }}'
                                     class="card-title user_i">
@@ -168,10 +176,58 @@ function getPositionUser($arr, $point)
                     ?>
 
                 </ul>
+                @if (!empty($posts))
+                <div class="posts mt-5">
+                    @foreach ($posts as $post)
+                        <div class="post-item mt-1">
+                            <div class="post-title">
+                                <h2>{{ $post->title }}</h2>
+                            </div>
+                            <div class="post-body">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo sunt accusantium nesciunt facilis quae tenetur quas! Nobis error voluptate illum omnis perferendis, dolores, dolor corporis maxime doloremque eius exercitationem illo?</p>
+                            </div>
+                            <div class="post-icon">
+                                <!-- Like Form -->
+                                <form action="{{ route('like') }}" method="POST">
+                                    @csrf
+                                    <?php
+                                    $checkLike = false; // Corrected variable name
+                                    foreach ($post->notifies as $item) {
+                                        if (($item->user_id == auth()->user()->id) && ($item->type == 'like')) {
+                                            $checkLike = true;
+                                            break;
+                                        }
+                                    }
+                                    ?>
+                                    <input type="hidden" name="id" value="{{ $post->id }}">
+                                    <button type="submit" class="like-post {{ $checkLike ? 'active' : '' }}"><i class="fa-regular fa-thumbs-up"></i></button>
+                                </form>
+                
+                                <!-- Favorite Form -->
+                                <form action="{{ route('favorite') }}" method="POST">
+                                    @csrf
+                                    <?php
+                                    $checkFavorite = false; // Corrected variable name
+                                    foreach ($post->notifies as $item) {
+                                        if (($item->user_id == auth()->user()->id) && ($item->type == 'favorite')) { // Corrected 'like' to 'favorite'
+                                            $checkFavorite = true;
+                                            break;
+                                        }
+                                    }
+                                    ?>
+                                    <input type="hidden" name="id" value="{{ $post->id }}">
+                                    <button type="submit" class="fv-post {{ $checkFavorite ? 'active' : '' }}"><i class="fa-solid fa-heart"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                
+                @endif
             </div>
         </div>
     </section>
-    
+    <footer></footer>
     <div class="card-main">
 
         <div class="container py-2">
@@ -195,7 +251,7 @@ function getPositionUser($arr, $point)
                 </div>
             </div>
         </div>
-        
+
     </div>
     <button type="button" class="btn btn-info btn-lg add" id="myBtn"><i class="fa-solid fa-plus"></i></button>
 
@@ -209,7 +265,7 @@ function getPositionUser($arr, $point)
                     <h4 class="modal-title">Thêm Bài Viết</h4>
                     <button type="button" class="btn close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="{{route('create.post')}}" method="POST">
+                <form action="{{ route('create.post') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <label for="title-post">
@@ -223,7 +279,7 @@ function getPositionUser($arr, $point)
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
-                    </div>  
+                    </div>
                 </form>
             </div>
 
@@ -245,7 +301,7 @@ function getPositionUser($arr, $point)
         },
         url: "http://127.0.0.1:8000/api/get-user",
         data: {
-            id: '{{auth()->user()->id}}'
+            id: '{{ auth()->user()->id }}'
         },
         dataType: "json",
         success: function(response) {
@@ -268,7 +324,7 @@ function getPositionUser($arr, $point)
         $("#myBtn").click(function() {
             $("#myModal").modal("toggle");
         });
-        $('.close').click(function(){
+        $('.close').click(function() {
             console.log(1);
             $("#myModal").modal("hide");
 
