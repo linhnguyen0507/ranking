@@ -34,17 +34,17 @@ class AuthController extends Controller
                 'email' => 'required|string|unique:users,email',
                 'password' => 'required|string|confirmed'
             ]);
-    
+                dd($fields);
             $user = User::create([
-                'name' => $fields['name'],
-                'email' => $fields['email'],
-                'password' => bcrypt($fields['password'])
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password'])
             ]);
             $rank = new Rank();
             $rank->save();
             Auth::login($user);
              $user->createToken('myapptoken')->plainTextToken;
-    return  response()->json('success',200);
+    return  redirect(route("index"));
         
     }
 
@@ -53,11 +53,13 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        
         $validator = Validator::make($request->all(),[
             'email' =>'required',
             'password'=>'required'
         ]);
         if ($validator->fails()) {
+            dd("loi");
             
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -66,11 +68,14 @@ class AuthController extends Controller
 
         // Check password
         if(!$user || !Hash::check($request['password'], $user->password)) {
+            dd("loi");
+
             return redirect()->route('login')->with('error','Tài khoản hoặc mật khẩu không chính xác');
         }
          $user->createToken('myapptoken', ['user_name'=> $user->name])->plainTextToken;
          $credentials = $request->only('email', 'password');
          if (Auth::attempt($credentials)) {
+            dd(Auth::user());
             return redirect()->route('index')->with('success', 'Login successful!');
         }
         return redirect()->route('login')->with('error', 'Invalid email or password.');
