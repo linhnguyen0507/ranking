@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="main">
-        <form class="me-auto"  id="register">
+        <form class="me-auto" method="POST" action="{{route('register')}}" id="register">
             <h2 class="header_logo">Register</h2>
             <label for="account">
                 <span>Email</span>
@@ -30,13 +30,13 @@
             </label>
             <label for="password" class="mt-3">
                 <span>Mật Khẩu</span>
-                <input type="text" id="password" class="mt-2">
+                <input type="text" type="hidden" id="password" class="mt-2">
                 <div class="errpsw"></div>
 
             </label>
             <label for="comfirm" class="mt-3 mb-3">
                 <span>Mật Lại Khẩu</span>
-                <input type="text" id="comfirm" class="mt-2">
+                <input type="text" type="hidden" id="comfirm" class="mt-2">
                 <div class="errcfm"></div>
 
             </label>
@@ -48,33 +48,6 @@
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    console.log(1);
-    $('#register').submit(function(e){
-        e.preventDefault();
-        $.ajax({
-        type: "post",
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "http://127.0.0.1:8000/api/register",
-        data: {
-            name: $('#name_user').val(),
-            email: $('#account').val(),
-            password: $('#password').val(),
-            password_confirmation: $('#comfirm').val()
-        },
-        dataType: "json",
-        success: function(response) {
-            window.location.href = '/'
-        },
-        error: function(response){
-            console.log(response);
-$('.errEmail').text(response.responseJSON.errors.email ? response.responseJSON.errors.email[0] : "");
-$('.errName').text(response.responseJSON.errors.name ? response.responseJSON.errors.name[0] : "");
-$('.errpsw').text(response.responseJSON.errors.password ? response.responseJSON.errors.password[0] : "");
-
-        }
-    })
-    })
+    
 </script>
 </html>
